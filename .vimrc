@@ -34,21 +34,7 @@ set encoding=utf8
 set tabstop=2
 set guifont=DroidSansMono\ Nerd\ Font:h11
 
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-
 let g:NERDTreeGitStatusWithFlags = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:NERDTreeGitStatusNodeColorization = 1
-let g:NERDTreeColorMapCustom = {
-    \ "Modified"  : "#528AB3",  
-    \ "Staged"    : "#538B54",  
-    \ "Untracked" : "#BE5849",  
-    \ "Dirty"     : "#299999",  
-    \ "Clean"     : "#87939A",   
-    \ "Ignored"   : "#808080"   
-    \ }   
 
 colorscheme cosmic_latte
 
