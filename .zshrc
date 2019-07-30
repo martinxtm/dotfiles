@@ -6,13 +6,7 @@ export PATH="$PATH:/Users/martin.ocker/Documents/confluent-4.0.0/bin"
 export RABBITMQ_SERVERS=rabbitmq-martin-ocker.env.xing.com:5672
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-# Setting PATH for Python 3.5
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
 export PATH
-alias venv3.6='source /Users/martin.ocker/.virtualenvs/venv3.6.4/bin/activate'
-alias beeline="export CLASSPATH=$(echo /Users/martin.ocker/Documents/xing/hive2/*.jar | tr ' ' ':'); java org.apache.hive.beeline.BeeLine -u 'jdbc:hive2://zk-1.hadoop-1.ams1.xing.com:2181,zk-2.hadoop-1.ams1.xing.com:2181,zk-3.hadoop-1.ams1.xing.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -n martin.ocker --color=true --showDbInPrompt=true"
-
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/martin.ocker/.oh-my-zsh"
 
@@ -106,6 +100,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias py='python'
+alias venv3.6='source /Users/martin.ocker/.virtualenvs/venv3.6.4/bin/activate'
+alias venv3.7='source /Users/martin.ocker/.virtualenvs/venv3.7/bin/activate'
+alias venv2.7='source /Users/martin.ocker/.virtualenvs/venv2.7.16/bin/activate'
+alias beeline="export CLASSPATH=$(echo /Users/martin.ocker/Documents/xing/hive2/*.jar | tr ' ' ':'); java org.apache.hive.beeline.BeeLine -u 'jdbc:hive2://zk-1.hadoop-1.ams1.xing.com:2181,zk-2.hadoop-1.ams1.xing.com:2181,zk-3.hadoop-1.ams1.xing.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -n martin.ocker --color=true --showDbInPrompt=true"
 alias vi=vim
 alias vin=vim
 bindkey -v
+
