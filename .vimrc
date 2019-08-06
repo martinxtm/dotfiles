@@ -1,7 +1,6 @@
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'lifepillar/vim-solarized8'
 Bundle 'christoomey/vim-tmux-navigator'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 " Git
@@ -20,8 +19,6 @@ Plugin 'nightsense/cosmic_latte'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" SQL formatter
-Plugin 'Chiel92/vim-autoformat'
 " always load vim-devicons as the last one
 Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
@@ -39,8 +36,10 @@ set background=dark
 set encoding=utf8
 set tabstop=2
 set mouse=a
-set guifont=DroidSansMono\ Nerd\ Font:h11
+set guifont=DroidSansMono\ Nerd\ Font:h14
+set backspace=indent,eol,start
 au BufNewFile,BufRead,BufReadPost *.hql set syntax=sql
+" python shit, not sure what it does and if it works
 autocmd FileType python set sw=4
 autocmd FileType python set ts=4
 autocmd FileType python set sts=4
@@ -70,11 +69,6 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
-
-let g:formatdef_hql= '"sqlformat  --reindent --keywords upper --identifiers lower -"'
-let b:formatters_hql = ['sqlformat']
-let g:formatdef_sql= '"sqlformat  --reindent --keywords upper --identifiers lower -"'
-let b:formatters_sql = ['sqlformat']
 
 colorscheme cosmic_latte
 set paste
