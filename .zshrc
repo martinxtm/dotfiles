@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PS1="\W $ "
+export LC_ALL=en_US.UTF-8
 export PATH="$PATH:/Users/martin.ocker/Documents/xing/olympus-tools/bin"
 export PATH="$PATH:/Users/martin.ocker/Documents/confluent-4.0.0/bin"
 export RABBITMQ_SERVERS=rabbitmq-martin-ocker.env.xing.com:5672
@@ -109,3 +110,6 @@ alias vi=vim
 alias vin=vim
 bindkey -v
 
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
