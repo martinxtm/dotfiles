@@ -1,0 +1,20 @@
+# setup python
+# execute things manually
+
+brew install pyenv-virtualenv
+
+pyenv install 3.6.9
+pyenv install 2.7.13
+
+pyenv virtualenv 3.6.9 jupyter
+
+# if this doesn't work restart shell
+# ( eval "$(pyenv init -)" has to be added to .bashrc / .zshrc )
+pyenv activate jupyter
+pip install jupyterlab
+python -m ipykernel install --user
+pyenv deactivate
+
+# this sets which python versions to look for 
+pyenv global 3.6.9 jupyter
+

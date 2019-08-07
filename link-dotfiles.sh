@@ -1,14 +1,22 @@
 #!/bin/bash
 
 if [ ! -e $HOME/.zshrc ]; then
-  ln -s $CONFIGURATION_PATH/.zshrc $HOME/.zshrc
+  ln -s $PWD/.zshrc $HOME/.zshrc
 fi
 
 if [ ! -e $HOME/.vimrc ]; then
-  ln -s $CONFIGURATION_PATH/.vimrc $HOME/.vimrc
+  ln -s $PWD/.vimrc $HOME/.vimrc
 fi
 
 if [ ! -e $HOME/.tmux.conf ]; then
-  ln -s $CONFIGURATION_PATH/.tmux.conf $HOME/.tmux.conf
+  ln -s $PWD/.tmux.conf $HOME/.tmux.conf
+fi
+
+if [ ! -e ~/.vim/bundle/Vundle.vim ]; then
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+
+if [ ! -e ~/.tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
