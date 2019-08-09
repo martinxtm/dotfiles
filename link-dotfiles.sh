@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# u may have to delete .zshrc 
 if [ ! -e $HOME/.zshrc ]; then
   ln -s $PWD/.zshrc $HOME/.zshrc
 fi

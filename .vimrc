@@ -34,7 +34,11 @@ set tabstop=2
 set mouse=a
 set guifont=DroidSansMono\ Nerd\ Font:h14
 set backspace=indent,eol,start
+set paste
+set clipboard=unnamed
+" read .hql files as .sql 
 au BufNewFile,BufRead,BufReadPost *.hql set syntax=sql
+
 " python shit, not sure what it does and if it works
 autocmd FileType python set sw=4
 autocmd FileType python set ts=4
@@ -60,7 +64,6 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 colorscheme cosmic_latte
-set paste
 
 " after a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons')
@@ -73,7 +76,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 com! Fjson %!python -c "import json, sys, collections; print json.dumps(json.load(sys.stdin, object_pairs_hook=collections.OrderedDict), indent=4)"
 :command NE NERDTree
 nmap \ :NERDTreeToggle<CR>
-vnoremap y "*y
 vnoremap <c-d> "_d
 vnoremap <c-p> "_dP
 
