@@ -6,6 +6,7 @@ export PATH="$PATH:/Users/martin.ocker/Documents/xing/olympus-tools/bin"
 export PATH="$PATH:/Users/martin.ocker/Documents/confluent-4.0.0/bin"
 export RABBITMQ_SERVERS=rabbitmq-martin-ocker.env.xing.com:5672
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 export PATH
 # Path to your oh-my-zsh installation.
