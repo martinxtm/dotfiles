@@ -8,6 +8,7 @@ Plugin 'tpope/vim-fugitive'
 " File browser
 Bundle 'scrooloose/nerdtree'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tsony-tsonev/nerdtree-git-plugin'
 " Fuzzy searcher
@@ -15,6 +16,10 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'benmills/vimux'
 Plugin 'nightsense/cosmic_latte'
+" copy code to REPL
+Plugin 'jpalardy/vim-slime'
+" python
+" Plugin 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " always load vim-devicons as the last one
 Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
@@ -36,8 +41,18 @@ set guifont=DroidSansMono\ Nerd\ Font:h14
 set backspace=indent,eol,start
 set paste
 set clipboard=unnamed
+set laststatus=2
+set statusline=%f
+set cursorline
+let mapleader = " "
+let maplocalleader = "\\"
+vnoremap <c-d> "_d
+vnoremap <c-p> "_dP
+" search selection with //
+vnoremap // y/<C-R>"<CR>
 " read .hql files as .sql 
 au BufNewFile,BufRead,BufReadPost *.hql set syntax=sql
+au BufNewFile,BufRead,BufReadPost *.siddhi set syntax=sql
 
 " python shit, not sure what it does and if it works
 autocmd FileType python set sw=4
@@ -73,9 +88,16 @@ endif
 " quit vim if nerdtree is the only open window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-com! Fjson %!python -c "import json, sys, collections; print json.dumps(json.load(sys.stdin, object_pairs_hook=collections.OrderedDict), indent=4)"
+com! JQ %!python -m json.tool
 :command NE NERDTree
-nmap \ :NERDTreeToggle<CR>
-vnoremap <c-d> "_d
-vnoremap <c-p> "_dP
+
+" vim cmd line
+let g:slime_target = "tmux"
+let g:slime_paste_file = tempname()
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
+let g:slime_dont_ask_default = 1
+
+" CtrlPfuzzy search
+let g:ctrlp_working_path_mode = 'rc'
+let g:ctrlp_regexp = 0
 

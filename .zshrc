@@ -3,10 +3,9 @@
 export PS1="\W $ "
 export LC_ALL=en_US.UTF-8
 export PATH="$PATH:/Users/martin.ocker/Documents/xing/olympus-tools/bin"
-export PATH="$PATH:/Users/martin.ocker/Documents/confluent-4.0.0/bin"
+export PATH="/Users/martin.ocker/.oly/bin:$PATH"
 export RABBITMQ_SERVERS=rabbitmq-martin-ocker.env.xing.com:5672
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 export PATH
 # Path to your oh-my-zsh installation.
@@ -114,3 +113,6 @@ bindkey -v
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

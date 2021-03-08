@@ -1,6 +1,6 @@
 # setup python
 # execute things manually
-
+brew install tcl-tk
 brew install pyenv-virtualenv
 
 pyenv install 3.6.9
