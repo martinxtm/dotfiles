@@ -35,7 +35,6 @@ syntax enable     " Use syntax highlighting
 set hlsearch
 set background=dark
 set encoding=utf8
-set tabstop=2
 set mouse=a
 set guifont=DroidSansMono\ Nerd\ Font:h14
 set backspace=indent,eol,start
@@ -44,6 +43,9 @@ set clipboard=unnamed
 set laststatus=2
 set statusline=%f
 set cursorline
+set tabstop=2
+set sts=2
+set expandtab
 let mapleader = " "
 let maplocalleader = "\\"
 vnoremap <c-d> "_d
@@ -54,7 +56,7 @@ vnoremap // y/<C-R>"<CR>
 au BufNewFile,BufRead,BufReadPost *.hql set syntax=sql
 au BufNewFile,BufRead,BufReadPost *.siddhi set syntax=sql
 
-" python shit, not sure what it does and if it works
+" tabs configuration for python files
 autocmd FileType python set sw=4
 autocmd FileType python set ts=4
 autocmd FileType python set sts=4

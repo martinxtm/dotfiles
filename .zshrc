@@ -3,6 +3,7 @@
 export PS1="\W $ "
 export LC_ALL=en_US.UTF-8
 export PATH="$PATH:/Users/martin.ocker/Documents/xing/olympus-tools/bin"
+export PATH="$(pyenv root)/shims:$PATH"
 export PATH="/Users/martin.ocker/.oly/bin:$PATH"
 export RABBITMQ_SERVERS=rabbitmq-martin-ocker.env.xing.com:5672
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -105,7 +106,8 @@ alias py='python'
 alias venv3.6='source /Users/martin.ocker/.virtualenvs/venv3.6.4/bin/activate'
 alias venv3.7='source /Users/martin.ocker/.virtualenvs/venv3.7/bin/activate'
 alias venv2.7='source /Users/martin.ocker/.virtualenvs/venv2.7.16/bin/activate'
-alias beeline="export CLASSPATH=$(echo /Users/martin.ocker/Documents/xing/hive2/*.jar | tr ' ' ':'); java org.apache.hive.beeline.BeeLine -u 'jdbc:hive2://zk-1.hadoop-1.ams1.xing.com:2181,zk-2.hadoop-1.ams1.xing.com:2181,zk-3.hadoop-1.ams1.xing.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -n martin.ocker --color=true --showDbInPrompt=true"
+# alias beeline="export CLASSPATH=$(echo /Users/martin.ocker/Documents/xing/hive2/*.jar | tr ' ' ':'); java org.apache.hive.beeline.BeeLine -u 'jdbc:hive2://zk-1.hadoop-1.ams1.xing.com:2181,zk-2.hadoop-1.ams1.xing.com:2181,zk-3.hadoop-1.ams1.xing.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -n martin.ocker --color=true --showDbInPrompt=true"
+alias beeline="sh ~/Documents/xing/beeline.sh"
 alias vi=vim
 alias vin=vim
 bindkey -v
@@ -116,3 +118,4 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+export PATH=/Users/martin.ocker/Documents/xing/slack_status_updater:$PATH
