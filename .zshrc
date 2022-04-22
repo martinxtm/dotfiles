@@ -6,6 +6,7 @@ export PATH="$PATH:/Users/martin.ocker/Documents/xing/olympus-tools/bin"
 export PATH="$(pyenv root)/shims:$PATH"
 export PATH="/Users/martin.ocker/.oly/bin:$PATH"
 export PATH="/Users/martin.ocker/.cargo/bin:$PATH"
+export PATH="/opt/jmeter/bin:$PATH"
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 export RABBITMQ_SERVERS=rabbitmq-martin-ocker.env.xing.com:5672
@@ -108,8 +109,9 @@ source $ZSH/oh-my-zsh.sh
 alias py='python'
 alias knox_login='(cd /Users/martin.ocker/Documents/xing/Analysis && python knox_login.py)'
 # alias beeline="export CLASSPATH=$(echo /Users/martin.ocker/Documents/xing/hive2/*.jar | tr ' ' ':'); java org.apache.hive.beeline.BeeLine -u 'jdbc:hive2://zk-1.hadoop-1.ams1.xing.com:2181,zk-2.hadoop-1.ams1.xing.com:2181,zk-3.hadoop-1.ams1.xing.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -n martin.ocker --color=true --showDbInPrompt=true"
-
-alias beeline="(cd ~/Documents/xing/beeline && sh beeline)"
+alias source_staging='source /Users/martin.ocker/nextcloud/Documents/staging-env.sh'
+# alias jmeter='/Users/martin.ocker/Documents/random/apache-jmeter-5.4.1/bin/jmeter'
+alias beeline='sh ~/Documents/xing/beeline/beeline'
 alias vi=vim
 alias vin=vim
 bindkey -v
@@ -121,3 +123,4 @@ fi
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=/Users/martin.ocker/Documents/xing/slack_status_updater:$PATH
+export PATH=/Users/martin.ocker/Documents/random/kafka_2.13-3.0.0/bin:$PATH
