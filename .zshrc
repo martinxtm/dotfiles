@@ -1,15 +1,13 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PS1="\W $ "
 export LC_ALL=en_US.UTF-8
-export PATH="$PATH:/Users/martin.ocker/Documents/xing/olympus-tools/bin"
-export PATH="$(pyenv root)/shims:$PATH"
 export PATH="/Users/martin.ocker/.oly/bin:$PATH"
 export PATH="/Users/martin.ocker/.cargo/bin:$PATH"
 export PATH="/opt/jmeter/bin:$PATH"
-export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(pyenv init -)"
 eval "$(jenv init -)"
-export RABBITMQ_SERVERS=rabbitmq-martin-ocker.env.xing.com:5672
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export PATH
@@ -102,23 +100,12 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias py='python'
-alias knox_login='(cd /Users/martin.ocker/Documents/xing/Analysis && python knox_login.py)'
-# alias beeline="export CLASSPATH=$(echo /Users/martin.ocker/Documents/xing/hive2/*.jar | tr ' ' ':'); java org.apache.hive.beeline.BeeLine -u 'jdbc:hive2://zk-1.hadoop-1.ams1.xing.com:2181,zk-2.hadoop-1.ams1.xing.com:2181,zk-3.hadoop-1.ams1.xing.com:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2' -n martin.ocker --color=true --showDbInPrompt=true"
-alias source_staging='source /Users/martin.ocker/nextcloud/Documents/staging-env.sh'
-# alias jmeter='/Users/martin.ocker/Documents/random/apache-jmeter-5.4.1/bin/jmeter'
-alias beeline='sh ~/Documents/xing/beeline/beeline'
 alias vi=vim
 alias vin=vim
-bindkey -v
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+alias knox_login='(cd /Users/martin.ocker/Documents/analysis && python knox_login.py)'
+alias source_staging='source /Users/martin.ocker/nextcloud/Documents/staging-env.sh'
+alias beeline='sh ~/Documents/beeline/beeline'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
