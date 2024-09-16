@@ -7,10 +7,7 @@ Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'tpope/vim-fugitive'
 " File browser
 Bundle 'scrooloose/nerdtree'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tsony-tsonev/nerdtree-git-plugin'
 " Fuzzy searcher
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
@@ -52,6 +49,7 @@ vnoremap <c-d> "_d
 vnoremap <c-p> "_dP
 " search selection with //
 vnoremap // y/<C-R>"<CR>
+nmap <c-n> :NERDTreeToggle<CR>
 " read .hql files as .sql 
 au BufNewFile,BufRead,BufReadPost *.hql set syntax=sql
 au BufNewFile,BufRead,BufReadPost *.siddhi set syntax=sql
@@ -65,20 +63,6 @@ let g:UltiSnipsExpandTrigger       = "<c-j>"
 let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
 let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
-
-let g:NERDTreeGitStatusWithFlags = 1
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
 
 colorscheme cosmic_latte
 

@@ -1,14 +1,18 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PS1="\W $ "
 export LC_ALL=en_US.UTF-8
-export PATH="/Users/martin.ocker/.oly/bin:$PATH"
-export PATH="/Users/martin.ocker/.cargo/bin:$PATH"
+export PATH="$HOME/.oly/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/opt/jmeter/bin:$PATH"
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(pyenv init -)"
 eval "$(jenv init -)"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH="$(pyenv root)/shims:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export PATH
 # Path to your oh-my-zsh installation.
@@ -101,13 +105,59 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias py='python'
-alias vi=vim
-alias vin=vim
+alias vi=nvim
+alias vin=nvim
 alias knox_login='(cd /Users/martin.ocker/Documents/analysis && python knox_login.py)'
 alias source_staging='source /Users/martin.ocker/nextcloud/Documents/staging-env.sh'
 alias beeline='sh ~/Documents/beeline/beeline'
 
+# BEGIN_AWS_SSO_CLI
+
+# AWS SSO requires `bashcompinit` which needs to be enabled once and
+# only once in your shell.  Hence we do not include the two lines:
+#
+# autoload -Uz +X compinit && compinit
+# autoload -Uz +X bashcompinit && bashcompinit
+#
+# If you do not already have these lines, you must COPY the lines 
+# above, place it OUTSIDE of the BEGIN/END_AWS_SSO_CLI markers
+# and of course uncomment it
+
+export AWS_PROFILE=nw-enrichment-ml-prod:NW-Administrator
+__aws_sso_profile_complete() {
+     local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    _multi_parts : "($(/opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
+}
+
+aws-sso-profile() {
+    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    if [ -n "$AWS_PROFILE" ]; then
+        echo "Unable to assume a role while AWS_PROFILE is set"
+        return 1
+    fi
+    eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -p "$1")
+    if [ "$AWS_SSO_PROFILE" != "$1" ]; then
+        return 1
+    fi
+}
+
+aws-sso-clear() {
+    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    if [ -z "$AWS_SSO_PROFILE" ]; then
+        echo "AWS_SSO_PROFILE is not set"
+        return 1
+    fi
+    eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -c)
+}
+
+compdef __aws_sso_profile_complete aws-sso-profile
+complete -C /opt/homebrew/bin/aws-sso aws-sso
+
+# END_AWS_SSO_CLI
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-export PATH=/Users/martin.ocker/Documents/xing/slack_status_updater:$PATH
-export PATH=/Users/martin.ocker/Documents/random/kafka_2.13-3.0.0/bin:$PATH
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+source /Users/martin.ocker/.config/op/plugins.sh
