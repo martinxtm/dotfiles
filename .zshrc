@@ -1,163 +1,85 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PS1="\W $ "
-export LC_ALL=en_US.UTF-8
-export PATH="$HOME/.oly/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/opt/jmeter/bin:$PATH"
-export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(pyenv init -)"
-eval "$(jenv init -)"
-export PATH="$(pyenv root)/shims:$PATH"
-export PATH="$HOME/.jenv/bin:$PATH"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# ~/.zshrc
+# Load common env (safe for both interactive and non-interactive)
+[ -f "$HOME/.zshenv_common" ] && source "$HOME/.zshenv_common"
 
-export PATH
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/martin.ocker/.oh-my-zsh"
+# If shell is non-interactive, stop here to keep startup fast.
+# (Interactive shells continue below.)
+case "$-" in
+  *i*) ;;  # interactive: continue
+  *) return 0 ;;
+esac
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# -------------------------
+# Interactive-only settings
+# -------------------------
+
+# Oh My Zsh
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git tmux vi-mode)
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
-source $ZSH/oh-my-zsh.sh
+# Homebrew shellenv (if installed)
+if [ -x "/opt/homebrew/bin/brew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-# User configuration
+# pyenv (interactive init only)
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# jenv init (interactive only)
+if command -v jenv >/dev/null 2>&1; then
+  eval "$(jenv init -)"
+fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# rvm (load as function for interactive sessions)
+if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+  # Load RVM into a shell session *as a function*
+  source "$HOME/.rvm/scripts/rvm"
+fi
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# Prompt
+export PS1="%~ $ "
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# Aliases
 alias py='python'
-alias vi=nvim
-alias vin=nvim
-alias knox_login='(cd /Users/martin.ocker/Documents/analysis && python knox_login.py)'
-alias source_staging='source /Users/martin.ocker/nextcloud/Documents/staging-env.sh'
-alias beeline='sh ~/Documents/beeline/beeline'
+alias vi='nvim'
+alias vin='nvim'
 
-# BEGIN_AWS_SSO_CLI
-
-# AWS SSO requires `bashcompinit` which needs to be enabled once and
-# only once in your shell.  Hence we do not include the two lines:
-#
-# autoload -Uz +X compinit && compinit
-# autoload -Uz +X bashcompinit && bashcompinit
-#
-# If you do not already have these lines, you must COPY the lines 
-# above, place it OUTSIDE of the BEGIN/END_AWS_SSO_CLI markers
-# and of course uncomment it
-
+# AWS SSO helpers (interactive completions)
 export AWS_PROFILE=nw-enrichment-ml-prod:NW-Administrator
 __aws_sso_profile_complete() {
-     local _args=${AWS_SSO_HELPER_ARGS:- -L error}
-    _multi_parts : "($(/opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
+  local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+  _multi_parts : "($(/opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
 }
-
 aws-sso-profile() {
-    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
-    if [ -n "$AWS_PROFILE" ]; then
-        echo "Unable to assume a role while AWS_PROFILE is set"
-        return 1
-    fi
-    eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -p "$1")
-    if [ "$AWS_SSO_PROFILE" != "$1" ]; then
-        return 1
-    fi
+  local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+  if [ -n "$AWS_PROFILE" ]; then
+    echo "Unable to assume a role while AWS_PROFILE is set"
+    return 1
+  fi
+  eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -p "$1")
+  if [ "$AWS_SSO_PROFILE" != "$1" ]; then
+    return 1
+  fi
 }
-
 aws-sso-clear() {
-    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
-    if [ -z "$AWS_SSO_PROFILE" ]; then
-        echo "AWS_SSO_PROFILE is not set"
-        return 1
-    fi
-    eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -c)
+  local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+  if [ -z "$AWS_SSO_PROFILE" ]; then
+    echo "AWS_SSO_PROFILE is not set"
+    return 1
+  fi
+  eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -c)
 }
+if command -v compdef >/dev/null 2>&1; then
+  compdef __aws_sso_profile_complete aws-sso-profile
+fi
+if command -v complete >/dev/null 2>&1; then
+  complete -C /opt/homebrew/bin/aws-sso aws-sso
+fi
 
-compdef __aws_sso_profile_complete aws-sso-profile
-complete -C /opt/homebrew/bin/aws-sso aws-sso
+# Optional: load local plugin file if present
+[ -f "$HOME/.config/op/plugins.sh" ] && source "$HOME/.config/op/plugins.sh"
 
-# END_AWS_SSO_CLI
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
-source /Users/martin.ocker/.config/op/plugins.sh

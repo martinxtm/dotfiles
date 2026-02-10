@@ -1,0 +1,42 @@
+# ~/.zshenv_common
+# Common environment for interactive and non-interactive shells.
+
+# Helper: prepend a directory to PATH if not already present
+path_prepend() {
+  case ":$PATH:" in
+    *":$1:"*) return ;;
+    *) PATH="$1:$PATH" ;;
+  esac
+}
+
+# Basic user bins
+path_prepend "$HOME/bin"
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.oly/bin"
+path_prepend "$HOME/.cargo/bin"
+path_prepend "/opt/jmeter/bin"
+path_prepend "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+path_prepend "/Applications/SnowSQL.app/Contents/MacOS"
+path_prepend "/Applications/SnowflakeCLI.app/Contents/MacOS/"
+path_prepend "$HOME/go/bin"
+
+# pyenv shims should be available for scripts that call Python
+if command -v pyenv >/dev/null 2>&1; then
+  path_prepend "$(pyenv root)/shims"
+fi
+
+# jenv binary location (init is interactive-only below)
+path_prepend "$HOME/.jenv/bin"
+
+# RVM binary on PATH (RVM functions are loaded interactively below)
+path_prepend "$HOME/.rvm/bin"
+
+# Export locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export PATH
+
+# Optional: load Jira env if present
+[ -f "$HOME/.jira_env" ] && source "$HOME/.jira_env"
+

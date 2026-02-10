@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# u may have to delete .zshenv
+if [ ! -e "$HOME/.zshenv" ]; then
+  ln -s "$PWD/.zshenv_common" "$HOME/.zshenv"
+fi
+
 # u may have to delete .zshrc 
 if [ ! -e $HOME/.zshrc ]; then
   ln -s $PWD/.zshrc $HOME/.zshrc
