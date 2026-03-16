@@ -11,7 +11,6 @@ vim.opt.hlsearch = true
 vim.opt.mouse = "a"
 vim.opt.encoding = "utf-8"
 vim.opt.backspace = { "indent", "eol", "start" }
-vim.opt.clipboard = "unnamedplus"
 vim.opt.laststatus = 2
 vim.opt.statusline = "%f"
 vim.opt.cursorline = true
@@ -20,6 +19,12 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
+
+if vim.fn.has("macunix") == 1 then
+  vim.opt.clipboard = "unnamedplus"
+else
+  vim.opt.clipboard = ""
+end
 
 vim.cmd("syntax enable")
 vim.cmd("filetype plugin indent on")
@@ -40,20 +45,27 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local has_tmux = vim.fn.executable("tmux") == 1
+
 -- --------------------
 -- Plugins
 -- --------------------
 require("lazy").setup({
-  { "christoomey/vim-tmux-navigator" },
+  {
+    "christoomey/vim-tmux-navigator",
+    cond = has_tmux,
+  },
 
-  { "nvim-tree/nvim-tree.lua",
+  {
+    "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("nvim-tree").setup({})
     end,
   },
 
-  { "ibhagwan/fzf-lua",
+  {
+    "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("fzf-lua").setup({})
@@ -62,9 +74,15 @@ require("lazy").setup({
 
   { "tpope/vim-fugitive" },
 
-  { "jpalardy/vim-slime" },
+  {
+    "jpalardy/vim-slime",
+    cond = has_tmux,
+  },
 
-  { "benmills/vimux" },
+  {
+    "benmills/vimux",
+    cond = has_tmux,
+  },
 
   { "nightsense/cosmic_latte" },
 })
@@ -78,9 +96,9 @@ vim.cmd("colorscheme cosmic_latte")
 -- --------------------
 -- Keymaps
 -- --------------------
-vim.keymap.set("v", "<C-d>", "\"_d")
-vim.keymap.set("v", "<C-p>", "\"_dP")
-vim.keymap.set("v", "//", "y/<C-R>\"<CR>")
+vim.keymap.set("v", "<C-d>", '"_d')
+vim.keymap.set("v", "<C-p>", '"_dP')
+vim.keymap.set("v", "//", 'y/<C-R>"<CR>')
 
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ff", ":FzfLua files<CR>", { silent = true })
@@ -113,7 +131,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Quit if file tree is the only window left
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local wins = vim.fn.winnr("$")
@@ -133,10 +150,12 @@ vim.api.nvim_create_user_command("NE", "NvimTreeToggle", {})
 -- --------------------
 -- vim-slime
 -- --------------------
-vim.g.slime_target = "tmux"
-vim.g.slime_paste_file = vim.fn.tempname()
-vim.g.slime_default_config = {
-  socket_name = "default",
-  target_pane = "{right-of}",
-}
-vim.g.slime_dont_ask_default = 1
+if has_tmux then
+  vim.g.slime_target = "tmux"
+  vim.g.slime_paste_file = vim.fn.tempname()
+  vim.g.slime_default_config = {
+    socket_name = "default",
+    target_pane = "{right-of}",
+  }
+  vim.g.slime_dont_ask_default = 1
+end

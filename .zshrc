@@ -24,11 +24,6 @@ if [ -x "/opt/homebrew/bin/brew" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# pyenv (interactive init only)
-if command -v pyenv >/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 # jenv init (interactive only)
 if command -v jenv >/dev/null 2>&1; then
   eval "$(jenv init -)"
