@@ -41,7 +41,7 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
 fi
 
 # Prompt
-export PS1="%~ $ "
+# export PS1="%~ $ "
 
 # Aliases
 alias py='python'
@@ -83,3 +83,6 @@ fi
 # Optional: load local plugin file if present
 [ -f "$HOME/.config/op/plugins.sh" ] && source "$HOME/.config/op/plugins.sh"
 
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH

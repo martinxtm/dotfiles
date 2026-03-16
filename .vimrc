@@ -1,89 +1,112 @@
-set rtp+=~/.vim/bundle/Vundle.vim/
+set nocompatible
+
+" --------------------
+" Plugins (Vundle)
+" --------------------
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
-Bundle 'christoomey/vim-tmux-navigator'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-" Git
-Plugin 'tpope/vim-fugitive'
-" File browser
-Bundle 'scrooloose/nerdtree'
+
+" Navigation / file browser
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'preservim/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-" Fuzzy searcher
+
+" Search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'benmills/vimux'
+
+" Git
+Plugin 'tpope/vim-fugitive'
+
+" UI
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'nightsense/cosmic_latte'
-" copy code to REPL
-Plugin 'jpalardy/vim-slime'
-" python
-" Plugin 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" always load vim-devicons as the last one
 Plugin 'ryanoasis/vim-devicons'
+
+" REPL / tmux
+Plugin 'benmills/vimux'
+Plugin 'jpalardy/vim-slime'
+
 call vundle#end()
 
-set nocompatible
-syntax on
-filetype off
+" --------------------
+" Core settings
+" --------------------
+syntax enable
 filetype plugin indent on
 
-" turn hybrid line numbers on
-set number relativenumber
-syntax enable     " Use syntax highlighting
+set number
+set relativenumber
 set hlsearch
 set background=dark
-set encoding=utf8
+set encoding=utf-8
 set mouse=a
-set guifont=DroidSansMono\ Nerd\ Font:h14
 set backspace=indent,eol,start
-set paste
-set clipboard=unnamed
+set clipboard=unnamedplus
 set laststatus=2
 set statusline=%f
 set cursorline
+
 set tabstop=2
-set sts=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
+
 let mapleader = " "
 let maplocalleader = "\\"
-vnoremap <c-d> "_d
-vnoremap <c-p> "_dP
-" search selection with //
+
+" GUI only
+if exists('+guifont')
+  set guifont=DroidSansMono\ Nerd\ Font:h14
+endif
+
+" --------------------
+" Mappings
+" --------------------
+vnoremap <C-d> "_d
+vnoremap <C-p> "_dP
 vnoremap // y/<C-R>"<CR>
-nmap <c-n> :NERDTreeToggle<CR>
-" read .hql files as .sql 
-au BufNewFile,BufRead,BufReadPost *.hql set syntax=sql
-au BufNewFile,BufRead,BufReadPost *.siddhi set syntax=sql
+nnoremap <C-n> :NERDTreeToggle<CR>
 
-" tabs configuration for python files
-autocmd FileType python set sw=4
-autocmd FileType python set ts=4
-autocmd FileType python set sts=4
+" --------------------
+" Filetype overrides
+" --------------------
+autocmd BufNewFile,BufRead *.hql setfiletype sql
+autocmd BufNewFile,BufRead *.siddhi setfiletype sql
 
-let g:UltiSnipsExpandTrigger       = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
+" Python indentation
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
-colorscheme cosmic_latte
+" --------------------
+" Commands
+" --------------------
+command! JQ %!python3 -m json.tool
+command! NE NERDTree
 
-" after a re-source, fix syntax matching issues (concealing brackets):
+" --------------------
+" vim-devicons refresh
+" --------------------
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 
-" quit vim if nerdtree is the only open window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Quit Vim if NERDTree is the only window left
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-com! JQ %!python -m json.tool
-:command NE NERDTree
-
-" vim cmd line
+" --------------------
+" vim-slime
+" --------------------
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
-let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
+let g:slime_default_config = { "socket_name": "default", "target_pane": "{right-of}" }
 let g:slime_dont_ask_default = 1
 
-" CtrlPfuzzy search
+" --------------------
+" CtrlP
+" --------------------
 let g:ctrlp_working_path_mode = 'rc'
 let g:ctrlp_regexp = 0
 
+colorscheme cosmic_latte
