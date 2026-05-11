@@ -1,6 +1,10 @@
 -- Leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+vim.g.loaded_python3_provider = 1
+vim.g.loaded_node_provider = 1
+vim.g.loaded_perl_provider = 1
+vim.g.loaded_ruby_provider = 1
 
 -- --------------------
 -- Core settings
@@ -19,6 +23,10 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
+
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = "nc"
+vim.opt.termguicolors = true
 
 if vim.fn.has("macunix") == 1 then
   vim.opt.clipboard = "unnamedplus"
@@ -51,47 +59,32 @@ local has_tmux = vim.fn.executable("tmux") == 1
 -- Plugins
 -- --------------------
 require("lazy").setup({
-  {
-    "christoomey/vim-tmux-navigator",
-    cond = has_tmux,
-  },
-
-  {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("nvim-tree").setup({})
-    end,
-  },
-
-  {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("fzf-lua").setup({})
-    end,
-  },
-
-  { "tpope/vim-fugitive" },
-
-  {
-    "jpalardy/vim-slime",
-    cond = has_tmux,
-  },
-
-  {
-    "benmills/vimux",
-    cond = has_tmux,
-  },
-
+  { "christoomey/vim-tmux-navigator", cond = has_tmux },
   { "nightsense/cosmic_latte" },
+  { "folke/tokyonight.nvim" },
+  { "catppuccin/nvim" },
+  { "rebelot/kanagawa.nvim" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    opts = {
+      ensure_installed = { "markdown", "markdown_inline" },
+      highlight = { enable = true },
+    },
+  },
+  {
+    "nvim-tree/nvim-web-devicons",
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+  },
 })
 
 -- --------------------
 -- Colorscheme
 -- --------------------
 vim.opt.background = "dark"
-vim.cmd("colorscheme cosmic_latte")
+vim.cmd("colorscheme kanagawa")
 
 -- --------------------
 -- Keymaps
@@ -125,6 +118,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
   callback = function()
+    vim.treesitter.start()
     vim.opt_local.tabstop = 4
     vim.opt_local.shiftwidth = 4
     vim.opt_local.softtabstop = 4

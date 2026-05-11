@@ -18,8 +18,8 @@ if [ ! -e $HOME/.tmux.conf ]; then
   ln -s $PWD/.tmux.conf $HOME/.tmux.conf
 fi
 
-if [ ! -e ~/.vim/bundle/Vundle.vim ]; then
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+if [ ! -e $HOME/.aerospace.toml ]; then
+  ln -s $PWD/.aerospace.toml $HOME/.aerospace.toml
 fi
 
 if [ ! -e ~/.tmux/plugins/tpm ]; then
