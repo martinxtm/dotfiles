@@ -60,9 +60,6 @@ local has_tmux = vim.fn.executable("tmux") == 1
 -- --------------------
 require("lazy").setup({
   { "christoomey/vim-tmux-navigator", cond = has_tmux },
-  { "nightsense/cosmic_latte" },
-  { "folke/tokyonight.nvim" },
-  { "catppuccin/nvim" },
   { "rebelot/kanagawa.nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -76,7 +73,19 @@ require("lazy").setup({
     "nvim-tree/nvim-web-devicons",
   },
   {
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
     "MeanderingProgrammer/render-markdown.nvim",
+  },
+  {
+    "jpalardy/vim-slime",
+    cond = has_tmux,
   },
 })
 

@@ -37,3 +37,4 @@
 # env vars
 .zshrc.local
 
+.DS_Store
