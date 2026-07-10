@@ -19,7 +19,8 @@ fi
 
 PYTHON_VERSION="$(
   pyenv install --list \
-    | awk '{$1=$1}; $0 ~ /^'"${PYTHON_SERIES//./\\.}"'\\.[0-9]+$/ { print }' \
+    | rg "^[[:space:]]*${PYTHON_SERIES//./\\.}\\.[0-9]+$" \
+    | sed 's/^[[:space:]]*//' \
     | tail -1
 )"
 
