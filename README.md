@@ -42,9 +42,7 @@ ssh-add --apple-use-keychain ~/.ssh/id_ed25519_newmac
 Python:
 
 ```sh
-pyenv install 3.12
-pyenv global 3.12
-uv venv
+./setup_python.sh
 ```
 
 Still manual:
