@@ -11,6 +11,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew bundle --file="$PWD/Brewfile"
 
 ./link-dotfiles.sh
+./setup_aerospace.sh
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended

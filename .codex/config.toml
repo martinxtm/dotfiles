@@ -29,3 +29,9 @@ enabled = true
 
 [plugins."browser@openai-bundled"]
 enabled = true
+
+[projects."/Users/martin.ocker/dotfiles"]
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+"gpt-5.6-sol" = 1
