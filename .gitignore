@@ -1,40 +1,17 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Mac
 .DS_Store
 
-# env vars
+# Local shell overrides
 .zshrc.local
 
-.DS_Store
+# Local Git overrides
+.gitconfig.local
+
+# Setup/linker backups
+*.backup
+*.backup.*
+
+# Neovim generated state
+nvim/lazy-lock.json
+
+# Karabiner generated backups
+.config/karabiner/automatic_backups/
