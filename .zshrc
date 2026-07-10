@@ -40,5 +40,10 @@ alias vin='nvim'
 # Optional: load local plugin file if present
 [ -f "$HOME/.config/op/plugins.sh" ] && source "$HOME/.config/op/plugins.sh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]; then
+  source /opt/homebrew/opt/fzf/shell/completion.zsh
+fi
+if [ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]; then
+  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+fi
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
