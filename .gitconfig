@@ -1,0 +1,12 @@
+[user]
+	name = Martin Ocker
+	email = 20025557+martinxtm@users.noreply.github.com
+
+[pull]
+	rebase = true
+
+[core]
+	editor = nvim
+
+[init]
+	defaultBranch = main

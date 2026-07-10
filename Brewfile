@@ -16,6 +16,7 @@ brew "tmux"
 brew "uv"
 
 cask "1password-cli"
+cask "karabiner-elements"
 cask "nikitabobko/tap/aerospace"
 cask "codex"
 cask "font-hack-nerd-font"

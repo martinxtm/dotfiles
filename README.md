@@ -8,15 +8,20 @@ cd ~/dotfiles
 ./install.sh
 ```
 
+Re-running `./install.sh` is fine. Existing real files/directories are moved to `*.backup` before symlinks are created.
+
 Then:
 
 ```sh
+# either generate a fresh key or use a migrated one
 ssh-keygen -t ed25519 -C "you@example.com"
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 gh auth login
 gh ssh-key add ~/.ssh/id_ed25519.pub --title "$(scutil --get ComputerName)"
 ssh -T git@github.com
 ```
+
+If you use a migrated key instead, replace `id_ed25519` above with that filename.
 
 Pi access:
 
@@ -45,5 +50,6 @@ uv venv
 Still manual:
 - sign into 1Password
 - grant AeroSpace permissions
+- open Karabiner-Elements once so it picks up `~/.config/karabiner/karabiner.json`
 - grant SketchyBar / Borders permissions if prompted
 - optionally import iTerm2 preferences
