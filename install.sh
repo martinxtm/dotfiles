@@ -8,6 +8,8 @@ fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+brew trust 1password/tap
+
 brew bundle --file="$PWD/Brewfile"
 
 ./link-dotfiles.sh
