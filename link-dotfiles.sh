@@ -42,10 +42,17 @@ link_file "$PWD/.config/borders" "$HOME/.config/borders"
 link_file "$PWD/.config/karabiner" "$HOME/.config/karabiner"
 link_file "$PWD/.config/sketchybar" "$HOME/.config/sketchybar"
 link_file "$PWD/.ssh/config" "$HOME/.ssh/config"
-link_file "$PWD/AGENTS.md" "$HOME/.codex/AGENTS.md"
-link_file "$PWD/.codex/config.toml" "$HOME/.codex/config.toml"
-link_file "$PWD/jira-operations" "$HOME/.codex/skills/jira-operations"
 link_file "$PWD/nvim" "$HOME/.config/nvim"
+
+for skill_manifest in "$PWD"/*/SKILL.md; do
+  if [ ! -e "$skill_manifest" ]; then
+    continue
+  fi
+
+  skill_dir="$(dirname "$skill_manifest")"
+  skill_name="$(basename "$skill_dir")"
+  link_file "$skill_dir" "$HOME/.codex/skills/$skill_name"
+done
 
 if [ ! -e "$HOME/.tmux/plugins/tpm" ]; then
   git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"

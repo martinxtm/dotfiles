@@ -47,9 +47,11 @@ Python:
 
 Still manual:
 - sign into 1Password
+- sign into Codex / ChatGPT if needed
 - review keyboard shortcuts for conflicts with AeroSpace bindings
 - grant AeroSpace permissions
 - open Karabiner-Elements once so it picks up `~/.config/karabiner/karabiner.json`
 - grant SketchyBar / Borders permissions if prompted
 - optionally disable trackpad Mission Control / Space-swipe gestures if they get in the way
+- log out and back in if tap-to-click / right-click trackpad settings do not apply immediately
 - optionally import iTerm2 preferences

@@ -13,6 +13,8 @@ brew trust 1password/tap
 brew bundle --file="$PWD/Brewfile"
 
 ./link-dotfiles.sh
+./setup_codex.sh
+./setup_macos.sh
 ./setup_aerospace.sh
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

@@ -1,4 +1,6 @@
 .DS_Store
+.venv/
+.codex/config.toml
 
 # Local shell overrides
 .zshrc.local
