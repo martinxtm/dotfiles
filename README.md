@@ -46,6 +46,7 @@ Python:
 ```
 
 Still manual:
+- open Firefox once, then log into Dashlane
 - sign into 1Password
 - sign into Codex / ChatGPT if needed
 - review keyboard shortcuts for conflicts with AeroSpace bindings
