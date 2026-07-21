@@ -7,7 +7,19 @@ FIREFOX_POLICIES_DIR="${FIREFOX_APP}/Contents/Resources/distribution"
 SOURCE_POLICIES="$PWD/firefox/policies.json"
 
 if [ ! -d "$FIREFOX_APP" ]; then
-  echo "Firefox.app is not installed yet. Skipping Firefox setup."
+  if command -v brew >/dev/null 2>&1; then
+    brew install --cask firefox
+  fi
+fi
+
+if ! command -v defaultbrowser >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    brew install defaultbrowser
+  fi
+fi
+
+if [ ! -d "$FIREFOX_APP" ]; then
+  echo "Firefox.app is still not available. Skipping Firefox setup."
   exit 0
 fi
 

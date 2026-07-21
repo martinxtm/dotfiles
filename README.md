@@ -19,6 +19,7 @@ ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 gh auth login
 gh ssh-key add ~/.ssh/id_ed25519.pub --title "$(scutil --get ComputerName)"
 ssh -T git@github.com
+git remote set-url origin git@github.com:martinxtm/dotfiles.git
 ```
 
 If you use a migrated key instead, replace `id_ed25519` above with that filename.
@@ -54,5 +55,5 @@ Still manual:
 - open Karabiner-Elements once so it picks up `~/.config/karabiner/karabiner.json`
 - grant SketchyBar / Borders permissions if prompted
 - optionally disable trackpad Mission Control / Space-swipe gestures if they get in the way
-- log out and back in if tap-to-click / right-click trackpad settings do not apply immediately
+- log out and back in if trackpad, menu bar, or input-source settings do not apply immediately
 - optionally import iTerm2 preferences
