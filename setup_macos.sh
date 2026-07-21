@@ -17,6 +17,10 @@ defaults write com.apple.dock orientation -string left
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock persistent-others -array
+defaults write com.apple.dock expose-group-apps -bool true
+
+# Accessibility: opaque menu bar/Dock/sidebars instead of translucent.
+defaults write com.apple.universalaccess reduceTransparency -bool true
 
 # Menu bar: let SketchyBar own the top edge instead of stacking under Apple chrome.
 defaults write NSGlobalDomain _HIHideMenuBar -bool true
